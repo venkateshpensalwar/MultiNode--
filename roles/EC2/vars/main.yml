@@ -1,0 +1,26 @@
+---
+# vars file for EC2
+
+key: "newKey"
+region: "ap-south-1"
+
+# variables for kubernetes Master
+
+instance_type_Master: "t2.micro"
+image_Master: "ami-0bcf5425cdc1d8a85"
+security_group_Master: "Kubernetes-Master"
+count_Master: 1
+subnet_id_Master: "subnet-070fdbef63646c886"
+instance_tag_Master: "k8s_Master"
+
+
+
+# Variables for kubernetes Slave
+
+instance_type_Slave: "t2.micro"
+image_Slave: "ami-0bcf5425cdc1d8a85"
+security_group_Slave: "Kubernetes-Slave"
+count_Slave: 1
+subnet_id_Slave: "subnet-070fdbef63646c886"
+instance_tag_Slave: "k8s_Slave"
+

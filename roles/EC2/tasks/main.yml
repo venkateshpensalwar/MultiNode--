@@ -1,0 +1,30 @@
+---
+          - name: Launch Kubernetes Master
+            amazon.aws.ec2:
+                    region: "{{ region }}"
+                    key_name: "{{ key }}"
+                    instance_type: "{{ instance_type_Master }}"
+                    image: "{{ image_Master }}"
+                    wait: yes
+                    group: "{{ security_group_Master }}"
+                    count: "{{ count_Master }}"
+                    vpc_subnet_id: "{{ subnet_id_Master }}"
+                    assign_public_ip: yes
+                    instance_tags:
+                               Name: "{{ instance_tag_Master }}"
+
+
+          - name: Launch Kubernetes Slave
+            amazon.aws.ec2:
+                       region: "{{ region }}"
+                       key_name: "{{ key }}"
+                       instance_type: "{{ instance_type_Slave }}"
+                       image: "{{ image_Slave }}"
+                       wait: yes
+                       group: "{{ security_group_Slave  }}"
+                       count: "{{ count_Slave }}"
+                       vpc_subnet_id: "{{ subnet_id_Slave }}"
+                       assign_public_ip: yes
+                       instance_tags:
+                                   Name: "{{ instance_tag_Slave }}"
+
