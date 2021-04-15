@@ -1,0 +1,52 @@
+---
+- name: Configure Kubernetes repository
+  yum_repository:
+    name: kubernetes
+    description: offical kubernetes repo
+    baseurl: https://packages.cloud.google.com/yum/repos/kubernetes-el7-$basearch
+    gpgcheck: yes
+    gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    enabled: yes
+
+- name: Install kubeadm ,kubelet,kubectl and Docker
+  package: 
+         name: 
+            - kubeadm
+            - kubelet
+            - kubectl
+            - docker
+            - iproute-tc  
+         state: latest
+
+- name: start docker service
+  service:
+          name: docker
+          enabled: yes
+          state: started
+
+- name: Copy Docker configuration files
+  copy:
+          src: daemon.json
+          dest: /etc/docker/daemon.json
+        
+- name: restart the Docker services
+  service:
+          name: docker
+          state: restarted
+
+- name: start kubelet service
+  service:
+          name: kubelet
+          enabled: yes
+          state: started
+
+- name: Copy configurations for bridged traffic
+  copy:
+        src: k8s.conf
+        dest: /etc/sysctl.d/k8s.conf
+
+- name: Restart sysctl --system
+  shell: sysctl --system
+
+- name: Join Kubernetes cluster
+  shell: "{{ cluster_token }}"
