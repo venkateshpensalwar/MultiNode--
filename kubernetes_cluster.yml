@@ -1,0 +1,20 @@
+- hosts: tag_Name_k8s_Master
+  roles:
+          - name: Configure kubernetes Master
+            role: k8s-Master
+
+
+
+- hosts: tag_Name_k8s_Slave
+
+  vars_prompt:
+            - name: "cluster_token"
+              prompt: "Enter Cluster token"
+              private: no
+
+  roles:
+          - name: Configure kubernetes Slave
+            role: k8s-Worker
+
+
+
