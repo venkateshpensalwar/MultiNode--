@@ -6,15 +6,15 @@ Create ansible roles to setup multinode kubernetes cluster over AWS cloud.
 
 ## Steps to use roles to setup cluster over cloud
 
-Install Following packages in controller node
+Install Following packages in controller node.
 - python2 or python3
 - ansible
 
-Using pip to install following packages
+Using pip to install following packages.
 - boto or boto3
 
 
-After that, you need user credentials for accessing AWS. As ```ec2.py``` make an API call to AWS for your requirement. so we need to set 2 environment variable in the following file
+After that, you need user credentials for accessing AWS. As ```ec2.py``` make an API call to AWS for your requirement. so we need to set 2 environment variable in the following file.
 
 ```
 Create one file at  '~/'    with name ".boto"
