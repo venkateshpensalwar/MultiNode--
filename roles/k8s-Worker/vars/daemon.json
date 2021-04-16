@@ -1,4 +1,0 @@
-
-{
-	"exec_opts":["native.cgroupdriver=systemd"]
-}

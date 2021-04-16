@@ -1,2 +1,13 @@
 ---
 # vars file for k8s-Master
+
+packages:
+       - kubeadm
+       - kubelet
+       - kubectl
+       - docker
+       - iproute-tc 
+
+services:
+      - docker
+      - kubelet

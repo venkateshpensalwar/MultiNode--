@@ -8,21 +8,18 @@
     gpgkey: https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
     enabled: yes
 
-- name: Install kubeadm ,kubelet,kubectl and Docker
+- name: Install kubeadm,kubelet,kubectl,iproute-tc and Docker
   package: 
-         name: 
-            - kubeadm
-            - kubelet
-            - kubectl
-            - docker
-            - iproute-tc  
+         name: "{{ item }}" 
          state: latest
+  loop: "{{ packages }}"
 
-- name: start docker service
+- name: start the Docker and kubelet service
   service:
-          name: docker
+          name: "{{ item }}"
           enabled: yes
           state: started
+  loop: "{{ services }}"
 
 - name: Copy Docker configuration files
   copy:
@@ -33,12 +30,6 @@
   service:
           name: docker
           state: restarted
-
-- name: start kubelet service
-  service:
-          name: kubelet
-          enabled: yes
-          state: started
 
 - name: Copy configurations for bridged traffic
   copy:
